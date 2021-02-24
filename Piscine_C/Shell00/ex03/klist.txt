@@ -1,0 +1,5 @@
+Credentials cache: API:6D72BCEA-78CB-46D1-9403-BF5B390E51AA
+        Principal: apanthap@42ROMA.IT
+
+  Issued                Expires               Principal
+Nov 23 17:21:15 2020  Nov 24 03:21:03 2020  krbtgt/42ROMA.IT@42ROMA.IT
