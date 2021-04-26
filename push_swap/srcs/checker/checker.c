@@ -1,4 +1,4 @@
-#include "checker.h"
+#include "header.h"
 
 void    exit_all(char *err, void *to_free)
 {
@@ -9,6 +9,14 @@ void    exit_all(char *err, void *to_free)
 
 void    check_ascension(t_stack *a)
 {
+    t_stack *temp = a;
+
+    while(temp)
+    {
+        printf("%d ", temp->num);
+        temp = temp->next;
+    }
+    printf("\n");
     while (a->next)
     {
         if(a->num >= a->next->num)
@@ -20,46 +28,7 @@ void    check_ascension(t_stack *a)
 
 void    arrange(t_stack *a)
 {
-    t_stack *b;
-    char    *step;
-
-    b = NULL;
-    step = NULL;
-    get_next_line(0, &step);
-    if (step)
-    {
-        if(*step == 'r' && *(step + 1) == 'r' && *(step + 2) == 'a')
-            reverse_rotate(a);
-        else if(*step == 'r' && *(step + 1) == 'r' && *(step + 2) == 'b')
-            reverse_rotate(b);
-        else if(*step == 'r' && *(step + 1) == 'r' && *(step + 2) == 'r')
-        {
-            reverse_rotate(a);
-            reverse_rotate(b);
-        }
-        else if(*step == 's' && *(step + 1) == 'a')
-            swap(a);
-        else if(*step == 's' && *(step + 1) == 'b')
-            swap(b);
-        else if(*step == 's' && *(step + 1) == 's')
-        {
-            swap(a);
-            swap(b);
-        }
-        else if(*step == 'p' && *(step + 1) == 'a')
-            push(a, b);
-        else if(*step == 'p' && *(step + 1) == 'b')
-            push(b, a);
-        else if(*step == 'r' && *(step + 1) == 'a')
-            a = rotate(a);
-        else if(*step == 'r' && *(step + 1) == 'b')
-            b = rotate(b);
-        else if(*step == 'r' && *(step + 1) == 'r')
-        {
-            a = rotate(a);
-            b = rotate(b);
-        }
-    }
+    command_route(&a, NULL, NULL);
     check_ascension(a);
 }
 

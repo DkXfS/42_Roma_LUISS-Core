@@ -13,8 +13,10 @@ typedef struct s_stack
 }              t_stack;
 
 void    swap(t_stack *stk);
-void    push(t_stack *a, t_stack *b);
+void    push(t_stack **a, t_stack **b);
 t_stack *rotate(t_stack *stk);
 t_stack *reverse_rotate(t_stack *stk);
+void    double_swap(t_stack *a, t_stack *b);
+void    command_route(t_stack **a, t_stack *b, char *cmd);
 
 #endif
