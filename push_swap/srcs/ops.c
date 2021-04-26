@@ -45,12 +45,16 @@ t_stack *rotate(t_stack *stk)
     t_stack *temp;
     t_stack *temp2;
 
-    temp = stk;
-    temp2 = stk->next;
-    while (stk->next)
-        stk = stk->next;
-    stk->next = temp;
-    temp->next = NULL;
+    temp2 = stk;
+    if (stk)
+    {
+        temp = stk;
+        temp2 = stk->next;
+        while (stk->next)
+            stk = stk->next;
+        stk->next = temp;
+        temp->next = NULL;
+    }
     return (temp2);
 }
 
@@ -58,13 +62,16 @@ t_stack *reverse_rotate(t_stack *stk)
 {
     t_stack *temp;
 
-    temp = stk;
-    while (stk->next)
-        stk = stk->next;
-    stk->prev->next = NULL;
-    temp->prev = stk;
-    stk->next = temp;
-    stk->prev = NULL;
+    if (stk)
+    {
+        temp = stk;
+        while (stk->next)
+            stk = stk->next;
+        stk->prev->next = NULL;
+        temp->prev = stk;
+        stk->next = temp;
+        stk->prev = NULL;
+    }
     return (stk);
 }
 

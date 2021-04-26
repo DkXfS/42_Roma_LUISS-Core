@@ -2,7 +2,7 @@
 
 void    command_route(t_stack **a, t_stack *b, char *cmd)
 {
-    while (get_next_line(0, &cmd))
+    while (get_next_line(0, &cmd) > 0)
     {
         if(*cmd == 'r' && *(cmd + 1) == 'r' && *(cmd + 2) == 'a')
             *a = reverse_rotate(*a);
