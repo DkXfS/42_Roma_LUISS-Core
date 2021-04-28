@@ -2,9 +2,9 @@ NAME_CHECK	=	checker
 NAME_PUSWAP	=	push_swap
 
 SRCS		=	srcs/ops.c \
-				srcs/cmd_route.c \
 
 SRCS_CHECK	=	srcs/checker/checker.c \
+				srcs/cmd_route.c \
 
 SRCS_UTILS	=	utils/gnl/get_next_line.c \
 				utils/gnl/get_next_line_utils.c \
