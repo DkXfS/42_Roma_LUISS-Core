@@ -8,6 +8,8 @@ SRCS	=	srcs/ft_read.s \
 			srcs/ft_strlen.s
 
 B_SRCS	=	srcs/bonus/ft_list_size.s \
+			srcs/bonus/ft_list_push_front.s \
+			srcs/bonus/ft_atoi_base.s \
 
 ASM		=	$(SRCS:.s=.o)
 
