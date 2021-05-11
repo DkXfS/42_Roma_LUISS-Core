@@ -6,7 +6,7 @@ extern _malloc
 section .text
 
 _ft_list_push_front :
-    cmp [rdi], 0
+    cmp BYTE[rdi], 0
     je empty_list
     mov rdx, [rdi]
 
@@ -23,8 +23,8 @@ put_elem :
     pop rsi
     pop rdi
     mov [rdi], rax
-    mov [rax], BYTE rsi
-    mov [rax + 8], BYTE rdx
+    mov [rax], rsi
+    mov [rax + 8], rdx
     xor rax, rax
     ret
 

@@ -10,6 +10,7 @@ SRCS	=	srcs/ft_read.s \
 B_SRCS	=	srcs/bonus/ft_list_size.s \
 			srcs/bonus/ft_list_push_front.s \
 			srcs/bonus/ft_atoi_base.s \
+			srcs/bonus/ft_list_sort.s \
 
 ASM		=	$(SRCS:.s=.o)
 
@@ -33,5 +34,5 @@ fclean	:	clean
 
 re		:	fclean all
 
-bonus	:	$(ASM) $(B_ASM)
-			ar rcs $(NAME) $(ASM) $(B_ASM)
+bonus	:	$(NAME) $(B_ASM)
+			ar rcs $(NAME) $(B_ASM)
