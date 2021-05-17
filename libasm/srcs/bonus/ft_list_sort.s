@@ -1,60 +1,44 @@
 ;    void ft_list_sort(t_list **begin_list, int (*cmp)());
-;                           r11                 r13
-;       rcx = current start element
-;       r10 = current min element
-;       r9  = loop element
-;       r8  = temp reg
 
-global _ft_list_sort
+	section	.text
+	global	_ft_list_sort
 
-_ft_list_sort :
-    push r13
-    mov r10, [rdi]
-    mov r11, rdi
-    mov r13, rsi
-    cmp r10, 0
-    jz return
-    mov rcx, r10
-    mov r9, [r11 + 8]
-    xor rdi, rdi
-    mov rdi, [rcx]
-    jmp compare
+_ft_list_sort:
+	push	r12
+	push	r13
+	push	r15
+	cmp		rdi, 0			; 1st arg == 0, return
+	jz		return
+	mov		r12, [rdi]		; r12 = *head
+	mov		r15, rsi		; r15 = cmp function
 
-loop :
-    mov r8, [r9 + 8]
-    mov r9, [r8]
-    cmp r9, 0
-    jz swap
-    jmp compare
+_loop:
+	mov		r13, [r12 + 8]	; r13 = lst.next
+	cmp		r13, 0			; lst.next == 0
+	jz		return			; lst is over
+	push	rdi				; save lst head
+	mov		rdi, [r12]		; 1st arg = lst.data
+	mov		rsi, [r13]		; 2nd arg = lst.next.data
+	call	r15				; call compare function
+	pop		rdi				; restore lst head
+	cmp		rax, 0			; check return of cmp
+	jg		swap			; ret > 0, then swap
+	jmp		next			; else loop
 
-compare :
-    mov rsi, [r9]
-    push rcx
-    push r9
-    call r13
-    pop r9
-    pop rcx
-    cmp rax, 0
-    jg new_min
-    jmp loop
+swap:
+	mov		r10, [r12]		; r10 = lst.data
+	mov		r11, [r13]		; r11 = lst.next.data
+	mov		[r12], r11		; lst.data = r11
+	mov		[r13], r10		; lst.next.data = r10
+	mov		r12, [rdi]		; reset lst head
+	jmp		_loop
 
-new_min :
-    mov r10, r9
-    jmp loop
+next:
+	mov		r12, r13		; lst = lst.next
+	jmp		_loop
 
-swap :
-    mov r8, [rcx]
-    mov rdx, [r10]
-    mov [rcx], rdx
-    mov [r10], r8
-    mov rcx, [rcx + 8]
-    cmp rcx, 0
-    jz return
-    mov r9, rcx
-    mov rdi, [rcx]
-    jmp loop
-
-return :
-    pop r13
-    xor rax, rax
-    ret
+return:
+	pop		r15
+	pop		r13
+	pop		r12
+	ret

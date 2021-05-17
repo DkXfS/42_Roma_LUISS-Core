@@ -31,8 +31,13 @@ clean	:
 
 fclean	:	clean
 			rm -rf $(NAME)
+			rm -rf testbin
 
 re		:	fclean all
 
 bonus	:	$(NAME) $(B_ASM)
 			ar rcs $(NAME) $(B_ASM)
+
+test	:	$(NAME) $(B_ASM)
+			ar rcs $(NAME) $(B_ASM)
+			gcc $(CFLAGS) $(NAME) tester.c -o testbin
