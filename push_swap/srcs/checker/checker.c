@@ -1,10 +1,39 @@
 #include "header.h"
 
-void    exit_all(char *err, void *to_free)
+void    command_route(t_stack **a, t_stack *b, char *cmd)
 {
-    printf("%s", err);
-    to_free = 0;          //  ???
-    exit(0);
+    while (get_next_line(0, &cmd) > 0)
+    {
+        if(*cmd == 'r' && *(cmd + 1) == 'r' && *(cmd + 2) == 'a')
+            *a = reverse_rotate(*a);
+        else if(*cmd == 'r' && *(cmd + 1) == 'r' && *(cmd + 2) == 'b')
+            b = reverse_rotate(b);
+        else if(*cmd == 'r' && *(cmd + 1) == 'r' && *(cmd + 2) == 'r')
+        {
+            *a = reverse_rotate(*a);
+            b = reverse_rotate(b);
+        }
+        else if(*cmd == 's' && *(cmd + 1) == 'a')
+            swap(*a);
+        else if(*cmd == 's' && *(cmd + 1) == 'b')
+            swap(b);
+        else if(*cmd == 's' && *(cmd + 1) == 's')
+            double_swap(*a, b);
+        else if(*cmd == 'p' && *(cmd + 1) == 'a')
+            push(a, &b);
+        else if(*cmd == 'p' && *(cmd + 1) == 'b')
+            push(&b, a);
+        else if(*cmd == 'r' && *(cmd + 1) == 'a')
+            *a = rotate(*a);
+        else if(*cmd == 'r' && *(cmd + 1) == 'b')
+            b = rotate(b);
+        else if(*cmd == 'r' && *(cmd + 1) == 'r')
+        {
+            *a = rotate(*a);
+            b = rotate(b);
+        }
+        free(cmd);
+    }
 }
 
 void    check_ascension(t_stack *a)
@@ -26,54 +55,11 @@ void    check_ascension(t_stack *a)
     printf("OK\n");
 }
 
-void    arrange(t_stack *a)
-{
-    command_route(&a, NULL, NULL);
-    check_ascension(a);
-}
-
-int     check_dupe(t_stack *a)
-{
-    int val;
-
-    val = a->num;
-    a = a->next;
-    while (a)
-    {
-        if (a->num == val)
-            return (1);
-        a = a->next;
-    }
-    return (0);
-}
-
 int     main(int argc, char **argv)
 {
     t_stack *a;
-    t_stack *temp;
 
-    if (argc < 2)
-        printf("ERROR\nNo parameters found\n");
-    else
-    {
-        temp = NULL;
-        while (argc-- > 1)
-        {
-            if (!(a = (t_stack *)malloc(sizeof(t_stack))))
-                exit_all("ERROR\nMemAlloc Failed\n", a);
-            a->next = temp;
-            if (temp)
-                temp->prev = a;
-            if (*(argv[argc]) < '0' || *(argv[argc]) > '9')
-                exit_all("ERROR\nInvalid Parameters\n", a);
-            a->num = *(argv[argc]) - '0';
-            temp = a;
-            if (check_dupe(a))
-                exit_all("ERROR\nDuplicate values inserted\n", a);
-            a = a->prev;
-        }
-        a = NULL;
-        a = temp;
-        arrange(a);
-    }
+    a = make_stack(argc, argv);
+    command_route(&a, NULL, NULL);
+    check_ascension(a);
 }

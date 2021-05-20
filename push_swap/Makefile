@@ -2,9 +2,9 @@ NAME_CHECK	=	checker
 NAME_PUSWAP	=	push_swap
 
 SRCS		=	srcs/ops.c \
+				srcs/ops2.c \
 
 SRCS_CHECK	=	srcs/checker/checker.c \
-				srcs/cmd_route.c \
 
 SRCS_UTILS	=	utils/gnl/get_next_line.c \
 				utils/gnl/get_next_line_utils.c \
@@ -23,7 +23,7 @@ CFLAGS		=	-Wall -Werror -Wextra -I ./headers
 $(NAME_CHECK) :	$(OBJS_CHECK) $(OBJS_SRCS) $(OBJS_UTILS)
 				gcc -g $(CFLAGS) $(OBJS_SRCS) $(OBJS_CHECK) $(OBJS_UTILS) -o $(NAME_CHECK)
 
-##all :			$(NAME_CHECK)
+all :			$(NAME_PUSWAP)
 
 clean:
 				rm -f $(OBJS_CHECK) $(OBJS_SRCS) $(OBJS_UTILS)
