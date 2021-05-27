@@ -1,49 +1,87 @@
 #include "header.h"
 
-int stack_average(t_stack *stk)
+void    rrr(t_stack **a, t_stack **b)
 {
-    int temp;
-    int i;
-
-    temp = 0;
-    i = 0;
-    while (stk)
-    {
-        temp += stk->num;
-        stk = stk->next;
-        i++;
-    }
-    return (temp / i);
+    *b = reverse_rotate(*b);
+    *a = reverse_rotate(*a);
+    write(1, "rrr\n", 4);
 }
 
-void    push_swap(t_stack *a, t_stack *b)
+void    exec_moves(t_stack **a, t_stack **b, t_moves moves)
+{
+    while (moves.ra)
+    {
+        ra(a);
+        moves.ra--;
+    }
+    while (moves.rb)
+    {
+        rb(b);
+        moves.rb--;
+    }
+    while (moves.rr)
+    {
+        rr(a, b);
+        moves.rr--;
+    }
+    while (moves.rra)
+    {
+        rra(a);
+        moves.rra--;
+    }
+    while (moves.rrb)
+    {
+        rrb(b);
+        moves.rrb--;
+    }
+    while (moves.rrr)
+    {
+        rrr(a, b);
+        moves.rrr--;
+    }
+    push(b, a);
+}
+
+t_moves    find_best_move(t_stack *a, t_stack *b, int a_length, int b_length)
 {
     t_moves min_moves;
-    int min_num;
-    int i;
-    t_stack *temp;
+    t_moves moves;
+    int ra;
+
+    ra = 0;
+    min_moves.total = -1;
+    while (a)
+    {
+        moves = init_moves(moves);
+        moves.num = a->num;
+        moves.rb = calc_rb(a, b);
+        moves = optimize(moves, a_length, b_length, ra);
+        if(moves.total < min_moves.total || min_moves.total < 0)
+            min_moves = moves;
+        a = a->next;
+        ra++;
+    }
+    return (min_moves);
+}
+
+void    push_swap(int a_length, int b_length, t_stack *a, t_stack *b)
+{
     t_moves moves;
 
-    min_moves.total = -1;
-    min_num = -1;
-    i = 0;
     write(1, "pb\n", 2);
     push(&b, &a);
     write(1, "pb\n", 2);
     push(&b, &a);
-    temp = a;
-    while (temp)
+    while (a)
     {
-        moves = calc_moves(i, temp, b);
-        if(moves.total < min_moves.total || min_moves.total < 0)
-        {
-            min_moves = moves;
-            min_num = temp->num;
-        }
-        temp = temp->next;
-        i++;
+        moves = find_best_move(a, b, a_length, b_length);
+        exec_moves(&a, &b, moves);
     }
-//  make_move(&a, &b, min_moves, min_num)
+    while (b)
+    {
+        write(1, "pa\n", 2);
+        push(&a, &b);
+    }
 }
 
 // void    push_swap(t_stack *a, t_stack *b, int avg)
@@ -65,10 +103,18 @@ void    push_swap(t_stack *a, t_stack *b)
 
 int main(int argc, char **argv)
 {
+    int a_length;
     t_stack *main_stack;
-//    t_stack *b;
+    t_stack *temp;
     
+    a_length = 0;
     main_stack = make_stack(argc, argv);
+    temp = main_stack;
+    while (temp)
+    {
+        a_length++;
+        temp = temp->next;
+    }
 //  push_swap(main_stack, NULL, stack_average(main_stack));
-    push_swap(main_stack, NULL);
+    push_swap(a_length, 0, main_stack, NULL);
 }

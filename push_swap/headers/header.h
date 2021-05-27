@@ -21,6 +21,7 @@ typedef struct s_moves
     int total;
     int rrr;
     int rr;
+    int num;
 }              t_moves;
 
 /// ops ///
@@ -35,6 +36,8 @@ t_stack *make_stack(int argc, char **argv);
 void    command_route(t_stack **a, t_stack *b, char *cmd);
 
 /// push_swap ///
-t_moves calc_moves(int rotate_a, t_stack *a, t_stack *b);
+int calc_rb(t_stack *a, t_stack *b);
+t_moves init_moves(t_moves mv);
+t_moves optimize(t_moves moves, int a_length, int b_length, int ra);
 
 #endif
