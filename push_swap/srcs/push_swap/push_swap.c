@@ -68,38 +68,25 @@ void    push_swap(int a_length, int b_length, t_stack *a, t_stack *b)
 {
     t_moves moves;
 
-    write(1, "pb\n", 2);
+    write(1, "pb\n", 3);
     push(&b, &a);
-    write(1, "pb\n", 2);
+    write(1, "pb\n", 3);
     push(&b, &a);
+    a_length = a_length - 2;
+    b_length = b_length + 2;
     while (a)
     {
         moves = find_best_move(a, b, a_length, b_length);
         exec_moves(&a, &b, moves);
+        a_length--;
+        b_length++;
     }
     while (b)
     {
-        write(1, "pa\n", 2);
+        write(1, "pa\n", 3);
         push(&a, &b);
     }
 }
-
-// void    push_swap(t_stack *a, t_stack *b, int avg)
-// {
-//     while (a)
-//     {
-//         if (a->num > avg)
-//         {
-//             write(1, "pb\n", 2);
-//             push(&b, &a);
-//         }
-//         else
-//         {
-//             write(1, "ra", 2);
-//             a = rotate(a);
-//         }
-//     }
-// }
 
 int main(int argc, char **argv)
 {
@@ -109,12 +96,14 @@ int main(int argc, char **argv)
     
     a_length = 0;
     main_stack = make_stack(argc, argv);
-    temp = main_stack;
-    while (temp)
+    if (main_stack)
     {
-        a_length++;
-        temp = temp->next;
+        temp = main_stack;
+        while (temp)
+        {
+            a_length++;
+            temp = temp->next;
+        }
+        push_swap(a_length, 0, main_stack, NULL);
     }
-//  push_swap(main_stack, NULL, stack_average(main_stack));
-    push_swap(a_length, 0, main_stack, NULL);
 }

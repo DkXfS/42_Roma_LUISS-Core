@@ -67,5 +67,6 @@ t_moves optimize(t_moves moves, int a_length, int b_length, int ra)
     separate = separate_case(moves, a_length, b_length);
     if (together.total < separate.total)
         return(together);
-    return (separate);
+    else
+        return (separate);
 }

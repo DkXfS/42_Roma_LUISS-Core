@@ -31,6 +31,7 @@ t_stack *rotate(t_stack *stk);
 t_stack *reverse_rotate(t_stack *stk);
 void    double_swap(t_stack *a, t_stack *b);
 t_stack *make_stack(int argc, char **argv);
+void    exit_all(char *err, t_stack *to_free);
 
 /// checker ///
 void    command_route(t_stack **a, t_stack *b, char *cmd);
@@ -39,5 +40,10 @@ void    command_route(t_stack **a, t_stack *b, char *cmd);
 int calc_rb(t_stack *a, t_stack *b);
 t_moves init_moves(t_moves mv);
 t_moves optimize(t_moves moves, int a_length, int b_length, int ra);
+void    ra(t_stack **stk);
+void    rr(t_stack **a, t_stack **b);
+void    rb(t_stack **stk);
+void    rra(t_stack **a);
+void    rrb(t_stack **b);
 
 #endif

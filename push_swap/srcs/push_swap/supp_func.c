@@ -5,7 +5,7 @@ int calc_rb(t_stack *a, t_stack *b)
     int rb;
 
     rb = 0;
-    while (a->num < b->num)
+    while (b && a->num < b->num)
     {
         b = b->next;
         rb++;
