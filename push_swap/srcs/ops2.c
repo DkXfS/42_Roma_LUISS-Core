@@ -69,6 +69,7 @@ t_stack *make_stack(int argc, char **argv)
             if (!(a = (t_stack *)malloc(sizeof(t_stack))))
                 exit_all("ERROR\nMemAlloc Failed\n", a);
             a->next = temp;
+            a->prev = NULL;
             if (temp)
                 temp->prev = a;
             if (*(argv[argc]) < '0' || *(argv[argc]) > '9')
@@ -77,9 +78,9 @@ t_stack *make_stack(int argc, char **argv)
             temp = a;
             if (check_dupe(a))
                 exit_all("ERROR\nDuplicate values inserted\n", a);
-            a = a->prev;
+//            a = a->prev;
         }
-        a = temp;
+//        a = temp;
     }
     return (a);
 }

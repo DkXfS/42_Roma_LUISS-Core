@@ -40,6 +40,7 @@ void    exec_moves(t_stack **a, t_stack **b, t_moves moves)
         moves.rrr--;
     }
     push(b, a);
+    write(1, "pb\n", 3);
 }
 
 t_moves    find_best_move(t_stack *a, t_stack *b, int a_length, int b_length)
