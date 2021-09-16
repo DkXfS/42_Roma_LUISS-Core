@@ -8,10 +8,13 @@
 
 typedef struct s_philo_data
 {
-    int philo_id;
-    pthread_mutex_t print_control;
-    pthread_mutex_t fork1;
-    pthread_mutex_t fork2;
+    int id;
+    int max_philo;
+    int state;
+    int rx_fork;
+    long int state_start_time;
+    pthread_mutex_t *print_control;
+    pthread_mutex_t *forks;
     int time_death;
     int time_eat;
     int time_sleep;
@@ -26,6 +29,8 @@ typedef struct s_watcher
 /*//-_   utils   _-//*/
 
 int	ft_atoi(const char *nptr);
+long int curr_time_milli();
+void lock_n_print(pthread_mutex_t *print_mutex, char *str, int id);
 
 /*//-_   TMP   _-//*/
 

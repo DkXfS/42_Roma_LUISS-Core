@@ -30,3 +30,10 @@ long int curr_time_milli()
     gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
+
+void lock_n_print(pthread_mutex_t *print_mutex, char *str, int id)
+{
+	pthread_mutex_lock(print_mutex);
+	printf("%ld %d %s\n", curr_time_milli(), id, str);
+	pthread_mutex_unlock(print_mutex);
+}
