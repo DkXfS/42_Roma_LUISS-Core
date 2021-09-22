@@ -10,6 +10,7 @@ int main(int argc, char** argv)
     t_phil_dat **ph_dat_v;
     pthread_mutex_t **forks;
     pthread_mutex_t print_control;
+    pthread_t *philo_tid;
 
     if (argc < 5)
     {
@@ -21,6 +22,7 @@ int main(int argc, char** argv)
         temp = philo_num;
         ph_dat_v = malloc(philo_num * sizeof(t_phil_dat*));
         forks = malloc(philo_num * sizeof(pthread_mutex_t*));
+        philo_tid = malloc(philo_num * sizeof(pthread_t));
         while(temp)
         {
             forks[--temp]=malloc(sizeof(pthread_mutex_t));
@@ -29,12 +31,16 @@ int main(int argc, char** argv)
         while(temp < philo_num)
         {
             ph_dat_v[temp] = malloc(sizeof(t_phil_dat));
+            ph_dat_v[temp]->id = temp + 1;
+            ph_dat_v[temp]->max_philo = philo_num;
             ph_dat_v[temp]->time_death = ft_atoi(argv[2]);
             ph_dat_v[temp]->time_eat = ft_atoi(argv[3]);
             ph_dat_v[temp]->time_sleep = ft_atoi(argv[4]);
             ph_dat_v[temp]->print_control = &print_control;
             ph_dat_v[temp]->forks = forks;
-            pthread_create();
+            if (argc == 6)
+                ph_dat_v[temp]->num_eat = ft_atoi(argv[5]);
+            pthread_create(philo_tid[temp]);
         }
     }
 }
