@@ -5,6 +5,7 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_philo_data
 {
@@ -14,7 +15,7 @@ typedef struct s_philo_data
     int rx_fork;
     long int state_start_time;
     pthread_mutex_t *print_control;
-    pthread_mutex_t *forks;
+    pthread_mutex_t **forks;
     int time_death;
     int time_eat;
     int time_sleep;
@@ -32,6 +33,8 @@ int	ft_atoi(const char *nptr);
 long int curr_time_milli();
 void lock_n_print(pthread_mutex_t *print_mutex, char *str, int id);
 
-/*//-_   TMP   _-//*/
+/*//-_   philosophers_loop   _-//*/
+
+void *start(void *data);
 
 #endif

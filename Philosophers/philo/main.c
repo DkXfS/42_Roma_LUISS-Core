@@ -18,14 +18,13 @@ int main(int argc, char** argv)
     }
     else
     {
-        philo_num = ft_atoi(argv[1]);
+        philo_num = ft_atoi(argv[1]);   // TODO error : not numeric
         temp = philo_num;
         ph_dat_v = malloc(philo_num * sizeof(t_phil_dat*));
-        forks = malloc(philo_num * sizeof(pthread_mutex_t*));
+        forks = malloc(philo_num * sizeof(pthread_mutex_t));
         philo_tid = malloc(philo_num * sizeof(pthread_t));
         while(temp)
         {
-            forks[--temp]=malloc(sizeof(pthread_mutex_t));
             pthread_mutex_init(forks[temp], NULL);
         }
         while(temp < philo_num)
@@ -40,7 +39,7 @@ int main(int argc, char** argv)
             ph_dat_v[temp]->forks = forks;
             if (argc == 6)
                 ph_dat_v[temp]->num_eat = ft_atoi(argv[5]);
-            pthread_create(philo_tid[temp]);
+            pthread_create(&philo_tid[temp], NULL, start, &ph_dat_v[temp]);
         }
     }
 }
