@@ -1,43 +1,58 @@
-NAME_CHECK	=	checker
-NAME_PUSWAP	=	push_swap
+NAME		= push_swap
 
-SRC			=	srcs/ops.c \
-				srcs/ops2.c \
+BONUS_NAME	= checker
 
-SRC_CHECK	=	srcs/checker/checker.c \
+SRCS		=	\
+				push_swap_srcs/instant_sort_3_utils.c \
+				push_swap_srcs/instant_sort.c \
+				push_swap_srcs/instructions_2.c \
+				push_swap_srcs/instructions_utils.c \
+				push_swap_srcs/instructions.c \
+				push_swap_srcs/list_utils.c \
+				push_swap_srcs/main.c \
+				push_swap_srcs/quicksort.c \
+				push_swap_srcs/sorting_a_2.c \
+				push_swap_srcs/sorting_a.c \
+				push_swap_srcs/sorting_b_2.c \
+				push_swap_srcs/sorting_b.c \
+				push_swap_srcs/sorting.c \
+				push_swap_srcs/utils_2.c \
+				push_swap_srcs/utils.c \
 
-SRC_UTILS	=	utils/gnl/get_next_line.c \
-				utils/gnl/get_next_line_utils.c \
+OBJS		= $(SRCS:.c=.o)
 
-SRC_PUSWAP	=	srcs/push_swap/op_masks.c \
-				srcs/push_swap/optimize_moves.c \
-				srcs/push_swap/push_swap.c \
-				srcs/push_swap/supp_func.c \
+BONUS_SRCS	=	\
+				checker_srcs/gnl_utils.c \
+				checker_srcs/gnl.c \
+				checker_srcs/instructions_2.c \
+				checker_srcs/instructions_utils.c \
+				checker_srcs/instructions.c \
+				checker_srcs/list_utils.c \
+				checker_srcs/main.c \
+				checker_srcs/utils.c \
+				checker_srcs/utils_2.c \
 
-OBJ_CHECK 	=	$(SRC_CHECK:.c=.o)
+BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
 
-OBJ_UTILS	=	$(SRC_UTILS:.c=.o)
+CFLAGS		= -Wall -Wextra -Werror -I ./include
 
-OBJ_SRC		=	$(SRC:.c=.o)
+%.o :		%.c
+			gcc -c -g $(CFLAGS) $< -o $@
 
-OBJ_PUSWAP	=	$(SRC_PUSWAP:.c=.o)
+$(NAME):	$(OBJS)
+			gcc -g $(CFLAGS) $(OBJS) -o $(NAME)
 
-CFLAGS		=	-Wall -Werror -Wextra -I ./headers
+all:		$(NAME)
 
-%.o :			%.c
-				gcc -c -g $(CFLAGS) $< -o $@
+bonus:		$(NAME) $(BONUS_OBJS)
+			gcc -g $(CFLAGS) $(BONUS_OBJS) -o $(BONUS_NAME)
 
-$(NAME_CHECK) :	$(OBJ_SRC) $(OBJ_UTILS) $(OBJ_CHECK) 
-				gcc -g $(CFLAGS) $(OBJ_SRC) $(OBJ_CHECK) $(OBJ_UTILS) -o $(NAME_CHECK)
+clean:
+			rm -f $(OBJS) $(BONUS_OBJS)
 
-$(NAME_PUSWAP):	$(OBJ_SRC) $(OBJ_UTILS) $(OBJ_PUSWAP)
-				gcc -g $(CFLAGS) $(OBJ_UTILS) $(OBJ_SRC) $(OBJ_PUSWAP) -o $@
+fclean:		clean
+			rm -f $(NAME) $(BONUS_NAME)
 
-all :			$(NAME_PUSWAP)
+re:			fclean all
 
-clean :
-				rm -f $(OBJ_CHECK) $(OBJ_SRC) $(OBJ_UTILS) $(OBJ_PUSWAP)
-
-fclean :		clean
-				rm -f $(NAME_CHECK)
-				rm -f $(NAME_PUSWAP)
+.PHONY:		all clean fclean re
