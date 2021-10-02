@@ -13,7 +13,7 @@ void    thread_watch(t_phil_dat *ph_dat, int ph_num)
             i = 0;
         if (curr_time_milli() - ph_dat[i].state_start_time >= ph_dat[i].state_death_time)
         {
-            lock_n_print(ph_dat[i].print_control, "", ph_dat[i].id , ph_dat[i].state_death_time);
+            lock_n_print(ph_dat[i].print_control, "theoretical death time", ph_dat[i].id , ph_dat[i].state_death_time);
             fail_bool++;
             lock_n_print(ph_dat[i].print_control, "died", ph_dat[i].id, curr_time_milli() - ph_dat[i].zero_time);
         }
@@ -68,6 +68,8 @@ int main(int argc, char** argv)
             usleep(50);
         }
         thread_watch(ph_dat_v, philo_num);
+        while (temp)
+            pthread_detach(philo_tid[temp--]);
         free(ph_dat_v);
         free(forks);
         free(philo_tid);

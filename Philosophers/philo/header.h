@@ -11,7 +11,7 @@ typedef struct s_phil_dat
 {
     int id;
     int max_philo;
-    int state_death_time;
+    long int state_death_time;
     int rx_fork;
     long int state_start_time;
     pthread_mutex_t *print_control;
