@@ -31,9 +31,10 @@ long int curr_time_milli()
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void lock_n_print(pthread_mutex_t *print_mutex, char *str, int id, long int time)
+void lock_n_print(t_main *common, char *str, int id, long int time)
 {
-	pthread_mutex_lock(print_mutex);
-	printf("%ld %d %s\n", time, id, str);
-	pthread_mutex_unlock(print_mutex);
+	pthread_mutex_lock(&(common->print_control));
+	if (common->stop_bool != 'x')
+		printf("%ld %d %s\n", time, id, str);
+	pthread_mutex_unlock(&(common->print_control));
 }

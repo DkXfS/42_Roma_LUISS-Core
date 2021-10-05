@@ -1,4 +1,4 @@
-NAME		= Philosophers
+NAME		= philo
 
 SRCS		=	philosophers_loop.c\
 				utils.c\
