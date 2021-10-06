@@ -14,6 +14,8 @@ typedef struct s_main
     int sleep_time;
     int philo_num;
     int max_eat;
+    int do_max_eat;
+    int num_eat;
     long int zero_time;
     char stop_bool;
     pthread_mutex_t print_control;
@@ -34,6 +36,8 @@ typedef struct s_phil_dat
 int	ft_atoi(const char *nptr);
 long int curr_time_milli();
 void lock_n_print(t_main *common, char *str, int id, long int zerot);
+void ft_usleep(int time);
+void	end_print(int id, t_main *common);
 
 /*//-_   philosophers_loop   _-//*/
 
