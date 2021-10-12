@@ -6,7 +6,7 @@
 /*   By: apanthap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:10:29 by apanthap          #+#    #+#             */
-/*   Updated: 2021/10/12 15:13:10 by apanthap         ###   ########.fr       */
+/*   Updated: 2021/10/12 19:17:01 by apanthap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef struct s_phil_dat
 
 int			ft_atoi(const char *nptr);
 long int	curr_time_milli(void);
-void		lock_n_print(t_main *common, char *str, int id);
 void		ft_usleep(int time);
 void		end_print(int id, t_main *common);
+int			ft_isdigit(int c);
+void		get_values(t_main *common, int argc, char **argv);
 
 /*//-_   philosophers_loop   _-//*/
 

@@ -6,7 +6,7 @@
 /*   By: apanthap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:13:55 by apanthap          #+#    #+#             */
-/*   Updated: 2021/10/12 15:13:57 by apanthap         ###   ########.fr       */
+/*   Updated: 2021/10/12 19:16:23 by apanthap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,16 @@ void	thread_watch(t_phil_dat *ph_dat, int ph_num)
 		{
 			pthread_mutex_lock(&(ph_dat[i].common->print_control));
 			ph_dat[i].common->stop_bool = 'x';
-			/*
-			 *pthread_mutex_unlock(&(ph_dat[i].common->forks[ph_dat[i].rx_fork]));
-			*/
 			pthread_mutex_unlock(&(ph_dat[i].common->forks[ph_dat[i].id - 1]));
-			printf("%ld %s %d %s\n", curr_time_milli() - \
-					ph_dat[i].common->zero_time, "all philosophers have \
-					eaten", ph_dat[i].common->max_eat, "times");
+			printf("%ld %s %d %s\n", curr_time_milli() - ph_dat[i].\
+					common->zero_time, "all philosophers have eaten", \
+					ph_dat[i].common->max_eat, "times");
 			pthread_mutex_unlock(&(ph_dat[i].common->print_control));
 		}
 		i++;
 		if (i >= ph_num)
 			i = 0;
 	}
-}
-
-void	set_common_param(t_main *common, int argc, char **argv)
-{
-	common->philo_num = ft_atoi(argv[1]);// TODO error : not numeric
-	common->death_time = ft_atoi(argv[2]);
-	common->eat_time = ft_atoi(argv[3]);
-	common->sleep_time = ft_atoi(argv[4]);
-	if (argc == 6)
-	{
-		common->max_eat = ft_atoi(argv[5]);
-		common->do_max_eat = 1;
-	}
-	else
-	{
-		common->do_max_eat = 0;
-		common->max_eat = 0;
-	}
-	if (common->philo_num < 1 || common->death_time < 1 || common->eat_time < \
-			1 || (common->do_max_eat && common->max_eat < 1) || \
-			common->sleep_time < 1)
-	{
-		printf("ERROR: Invalid arguments\n");
-		exit(-1);
-	}
-	common->zero_time = curr_time_milli();
-	common->stop_bool = 0;
-	common->num_eat = 0;
-	pthread_mutex_init(&(common->print_control), NULL);
-	common->forks = malloc(common->philo_num * sizeof(pthread_mutex_t));
 }
 
 void	init_n_strt_ph(t_phil_dat *ph_dat, pthread_t *ph_tid, t_main *common)
@@ -93,6 +60,51 @@ void	init_n_strt_ph(t_phil_dat *ph_dat, pthread_t *ph_tid, t_main *common)
 	}
 }
 
+int	check_alpharg(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+			{
+				printf("ERROR: Non numeric arguments present\n");
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	set_common_param(t_main *common, int argc, char **argv)
+{
+	if (!check_alpharg(argc, argv))
+	{
+		get_values(common, argc, argv);
+		if (common->philo_num < 1 || common->death_time < 1 || \
+				common->eat_time < 1 || (common->do_max_eat && \
+					common->max_eat < 1) || common->sleep_time < 1)
+		{
+			printf("ERROR: Invalid arguments\n");
+			return (1);
+		}
+		common->zero_time = curr_time_milli();
+		common->stop_bool = 0;
+		common->num_eat = 0;
+		pthread_mutex_init(&(common->print_control), NULL);
+		common->forks = malloc(common->philo_num * sizeof(pthread_mutex_t));
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	int			temp;
@@ -106,7 +118,8 @@ int	main(int argc, char **argv)
 		printf("ERROR: Too many arguments\n");
 	else
 	{
-		set_common_param(&common, argc, argv);
+		if (set_common_param(&common, argc, argv))
+			return (1);
 		temp = common.philo_num;
 		ph_dat_v = malloc(common.philo_num * sizeof(t_phil_dat));
 		philo_tid = malloc(common.philo_num * sizeof(pthread_t));

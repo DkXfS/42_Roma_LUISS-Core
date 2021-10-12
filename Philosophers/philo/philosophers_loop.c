@@ -19,6 +19,14 @@ int	fork_free_exit(t_phil_dat *data)
 	return (0);
 }
 
+void	lock_n_print(t_main *common, char *str, int id)
+{
+	pthread_mutex_lock(&(common->print_control));
+	if (common->stop_bool != 'x')
+		printf("%ld\t%d\t%s\n", curr_time_milli() - common->zero_time, id, str);
+	pthread_mutex_unlock(&(common->print_control));
+}
+
 int	loop(t_phil_dat **data)
 {
 	lock_n_print((*data)->common, "is thinking", (*data)->id);

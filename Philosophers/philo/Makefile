@@ -2,6 +2,7 @@ NAME		= philo
 
 SRCS		=	philosophers_loop.c\
 				utils.c\
+				utils2.c\
 				main.c
 
 OBJS		= $(SRCS:.c=.o)

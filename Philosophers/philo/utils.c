@@ -6,7 +6,7 @@
 /*   By: apanthap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:40 by apanthap          #+#    #+#             */
-/*   Updated: 2021/10/12 14:30:44 by apanthap         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:51:10 by apanthap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ void	ft_usleep(int time)
 		usleep(time);
 }
 
-void	lock_n_print(t_main *common, char *str, int id)
-{
-	pthread_mutex_lock(&(common->print_control));
-	if (common->stop_bool != 'x')
-		printf("%ld\t%d\t%s\n", curr_time_milli() - common->zero_time, id, str);
-	pthread_mutex_unlock(&(common->print_control));
-}
-
 void	end_print(int id, t_main *common)
 {
 	int	rx_fork;
@@ -75,4 +67,11 @@ void	end_print(int id, t_main *common)
 	pthread_mutex_unlock(&(common->forks[id - 1]));
 	printf("%ld\t%d\t%s\n", curr_time_milli() - common->zero_time, id, "died");
 	pthread_mutex_unlock(&(common->print_control));
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
