@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apanthap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 14:30:40 by apanthap          #+#    #+#             */
+/*   Updated: 2021/10/12 14:30:44 by apanthap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 int	ft_atoi(const char *nptr)
 {
-	int num;
-	int minus;
+	int	num;
+	int	minus;
 
 	minus = 1;
 	num = 0;
@@ -24,38 +36,43 @@ int	ft_atoi(const char *nptr)
 	return (num * minus);
 }
 
-long int curr_time_milli()
+long int	curr_time_milli(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
-    gettimeofday(&time, NULL);
+	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 void	ft_usleep(int time)
 {
-	long int end_time;
+	long int	end_time;
 
 	end_time = curr_time_milli() + time;
-	time/=10;
-	while(curr_time_milli() < end_time)
+	time /= 10;
+	while (curr_time_milli() < end_time)
 		usleep(time);
 }
 
-void	lock_n_print(t_main *common, char *str, int id, long int time)
+void	lock_n_print(t_main *common, char *str, int id)
 {
 	pthread_mutex_lock(&(common->print_control));
 	if (common->stop_bool != 'x')
-		printf("%ld %d %s\n", time, id, str);
+		printf("%ld\t%d\t%s\n", curr_time_milli() - common->zero_time, id, str);
 	pthread_mutex_unlock(&(common->print_control));
 }
 
 void	end_print(int id, t_main *common)
 {
+	int	rx_fork;
+
+	rx_fork = id;
+	if (id == common->philo_num)
+		rx_fork = 0;
 	pthread_mutex_lock(&(common->print_control));
 	common->stop_bool = 'x';
-	//pthread_mutex_unlock(&(common->forks[ph_dat[i].rx_fork]));
+	pthread_mutex_unlock(&(common->forks[rx_fork]));
 	pthread_mutex_unlock(&(common->forks[id - 1]));
-	printf("%ld %d %s\n", curr_time_milli() - common->zero_time, id, "died");
+	printf("%ld\t%d\t%s\n", curr_time_milli() - common->zero_time, id, "died");
 	pthread_mutex_unlock(&(common->print_control));
 }
