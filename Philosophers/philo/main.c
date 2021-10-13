@@ -51,6 +51,7 @@ void	init_n_strt_ph(t_phil_dat *ph_dat, pthread_t *ph_tid, t_main *common)
 	{
 		ph_dat[ph_num].id = ph_num + 1;
 		ph_dat[ph_num].times_eaten = 0;
+		ph_dat[ph_num].count_eat = 1;
 		ph_dat[ph_num].common = common;
 		if (pthread_create(&ph_tid[ph_num], NULL, start, &ph_dat[ph_num]) != 0)
 			printf("pthread_create: Error creating thread no.%d\n", \

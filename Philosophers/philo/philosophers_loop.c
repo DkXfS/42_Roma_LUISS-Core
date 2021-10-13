@@ -6,7 +6,7 @@
 /*   By: apanthap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:14:14 by apanthap          #+#    #+#             */
-/*   Updated: 2021/10/12 15:14:17 by apanthap         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:00:48 by apanthap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	loop(t_phil_dat **data)
 	lock_n_print((*data)->common, "has taken a fork", (*data)->id);
 	if ((*data)->common->stop_bool == 'x')
 		return (fork_free_exit(*data));
-	(*data)->last_eat_time = curr_time_milli();
 	lock_n_print((*data)->common, "is eating", (*data)->id);
+	(*data)->last_eat_time = curr_time_milli();
 	ft_usleep((*data)->common->eat_time);
 	pthread_mutex_unlock(&(((*data)->common->forks)[((*data)->id) - 1]));
 	pthread_mutex_unlock(&(((*data)->common->forks)[(*data)->rx_fork]));
 	(*data)->times_eaten++;
-	if ((*data)->common->do_max_eat && (*data)->times_eaten >= \
-			(*data)->common->max_eat)
+	if ((*data)->count_eat && (*data)->common->do_max_eat && \
+			(*data)->times_eaten >= (*data)->common->max_eat)
 	{
 		(*data)->common->num_eat++;
-		return (0);
+		(*data)->count_eat = 0;
 	}
 	if ((*data)->common->stop_bool == 'x')
 		return (0);
