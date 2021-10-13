@@ -38,7 +38,7 @@ int	loop(t_phil_dat **data)
 		return (fork_free_exit(*data));
 	(*data)->last_eat_time = curr_time_milli();
 	lock_n_print((*data)->common, "is eating", (*data)->id);
-	usleep((*data)->common->eat_time * 1000);
+	ft_usleep((*data)->common->eat_time);
 	pthread_mutex_unlock(&(((*data)->common->forks)[((*data)->id) - 1]));
 	pthread_mutex_unlock(&(((*data)->common->forks)[(*data)->rx_fork]));
 	(*data)->times_eaten++;
@@ -51,7 +51,7 @@ int	loop(t_phil_dat **data)
 	if ((*data)->common->stop_bool == 'x')
 		return (0);
 	lock_n_print((*data)->common, "is sleeping", (*data)->id);
-	usleep((*data)->common->sleep_time * 1000);
+	ft_usleep((*data)->common->sleep_time);
 	return (1);
 }
 
@@ -67,8 +67,5 @@ void	*start(void *ph_data)
 	data->last_eat_time = curr_time_milli();
 	while (loop(&data))
 		;
-	//pthread_mutex_lock(&(data->common->print_control));     ////
-	//printf("ended : %d\n", data->id);                       ////
-	//pthread_mutex_unlock(&(data->common->print_control));   ////
 	return (0);
 }

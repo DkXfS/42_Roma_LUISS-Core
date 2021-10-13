@@ -49,7 +49,6 @@ void	ft_usleep(int time)
 	long int	end_time;
 
 	end_time = curr_time_milli() + time;
-	time /= 10;
 	while (curr_time_milli() < end_time)
 		usleep(time);
 }
