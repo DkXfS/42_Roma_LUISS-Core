@@ -73,26 +73,47 @@ bool Fixed::operator!=(Fixed& val){
     return !this->operator==(val);
 }
 
-Fixed& Fixed::operator+(Fixed& val){
+Fixed& Fixed::operator+(const Fixed& val){
     this->value += val.value;
     return *this;
 }
 
-Fixed& Fixed::operator-(Fixed& val){
+Fixed& Fixed::operator-(const Fixed& val){
     this->value -= val.value;
     return *this;
 }
 
-Fixed& Fixed::operator*(Fixed& val){
-    this->value *= val.value;
+Fixed& Fixed::operator*(const Fixed& val){
+    this->value = (this->value * val.value) >> 8;
     return *this;
 }
 
-Fixed& Fixed::operator/(Fixed& val){
+Fixed& Fixed::operator/(const Fixed& val){
     this->value /= val.value;
     return *this;
 }
 
+Fixed& Fixed::operator++(){
+    this->value += 1;
+    return *this;
+}
+
+Fixed Fixed::operator++(int){
+    Fixed temp = *this;
+    this->value += 1;
+    return temp;
+}
+
+Fixed& Fixed::operator--(){
+    this->value -= 1;
+    return *this;
+}
+
+Fixed Fixed::operator--(int){
+    Fixed temp = *this;
+    this->value -= 1;
+    return temp;
+}
 std::ostream& operator<<(std::ostream& o, const Fixed& val){
     o << val.toFloat();
     return o;

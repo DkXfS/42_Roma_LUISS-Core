@@ -20,10 +20,14 @@ class Fixed{
     bool operator<=(Fixed& val);
     bool operator!=(Fixed& val);
     bool operator==(Fixed& val);
-    Fixed& operator+(Fixed& val);
-    Fixed& operator-(Fixed& val);
-    Fixed& operator*(Fixed& val);
-    Fixed& operator/(Fixed& val);
+    Fixed& operator+(const Fixed& val);
+    Fixed& operator-(const Fixed& val);
+    Fixed& operator*(const Fixed& val);
+    Fixed& operator/(const Fixed& val);
+    Fixed& operator++();
+    Fixed operator++(int);
+    Fixed& operator--();
+    Fixed operator--(int);
     int getRawBits() const;
     void setRawBits(int const raw);
 };
