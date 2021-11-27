@@ -10,8 +10,6 @@ class Contact
     std::string number;
 
     public :
-        //Contact();
-        //~Contact();
         std::string getFirstName() const;
         void setFirstName(std::string str);
         std::string getLastName() const;
