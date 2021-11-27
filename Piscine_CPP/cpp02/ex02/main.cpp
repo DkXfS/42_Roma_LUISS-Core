@@ -19,6 +19,6 @@ int main(void){
     std::cout << "b-c = " << b - c << std::endl;
     std::cout << "b*c = " << b * c << std::endl;
     std::cout << "c/b = " << c / b << std::endl;
-    //std::cout << Fixed::max(a, b) << std::endl;
+    std::cout << "max(a, b) = " << Fixed::max(a, b) << std::endl;
     return 0;
 }

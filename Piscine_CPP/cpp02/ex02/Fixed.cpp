@@ -55,15 +55,15 @@ float Fixed::toFloat() const{
     return (float)(this->value / (float)(1<<8));
 }
 
-bool Fixed::operator>(Fixed& val) const{
+bool Fixed::operator>(const Fixed& val) const{
     return this->value > val.value;
 }
 
-bool Fixed::operator<(Fixed& val) const{
+bool Fixed::operator<(const Fixed& val) const{
     return this->value < val.value;
 }
 
-bool Fixed::operator>=(Fixed& val) const{
+bool Fixed::operator>=(const Fixed& val) const{
     return this->value >= val.value;
 }
 
@@ -71,11 +71,11 @@ bool Fixed::operator<=(const Fixed& val) const{
     return this->value <= val.value;
 }
 
-bool Fixed::operator==(Fixed& val) const{
+bool Fixed::operator==(const Fixed& val) const{
     return this->value == val.value;
 }
 
-bool Fixed::operator!=(Fixed& val) const{
+bool Fixed::operator!=(const Fixed& val) const{
     return !this->operator==(val);
 }
 
@@ -117,7 +117,24 @@ Fixed Fixed::operator--(int){
     this->value -= 1;
     return temp;
 }
+
 std::ostream& operator<<(std::ostream& o, const Fixed& val){
     o << val.toFloat();
     return o;
+}
+
+Fixed& Fixed::min(Fixed &a, Fixed &b){
+    return (a < b) ? a : b;
+}
+
+Fixed const & Fixed::min(const Fixed &a, const Fixed &b){
+    return (a < b) ? a : b;
+}
+
+Fixed& Fixed::max(Fixed &a, Fixed &b){
+    return (a > b) ? a : b;
+}
+
+const Fixed& Fixed::max(const Fixed &a, const Fixed &b){
+    return (a > b) ? a : b;
 }
