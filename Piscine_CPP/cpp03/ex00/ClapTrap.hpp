@@ -1,3 +1,5 @@
+#pragma once
+
 #include<iostream>
 #include<string>
 
@@ -8,6 +10,7 @@ class ClapTrap{
     int attackDamage;
 
     public:
+    ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap& a);
     ~ClapTrap();

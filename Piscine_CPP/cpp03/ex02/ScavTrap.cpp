@@ -24,7 +24,7 @@ void ScavTrap::attack(std::string const & target){
     if(energyPoints > 1){
         std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
         energyPoints--;
-        std::cout << "It loses an energy point. It now has " << energyPoints << " energy points." << std::endl;
+        std::cout << "\tIt loses an energy point. It now has " << energyPoints << " energy points." << std::endl;
     }
     else
         std::cout << "Scavtrap " << name << " wants to attack but it has 0 energypoints." << std::endl;
