@@ -1,7 +1,8 @@
 SRC		=	main.cpp\
 			ClapTrap.cpp\
 			ScavTrap.cpp\
-			FragTrap.cpp
+			FragTrap.cpp\
+			DiamondTrap.cpp
 
 NAME	=	mechArena
 
