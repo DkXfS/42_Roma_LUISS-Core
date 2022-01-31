@@ -8,7 +8,7 @@ NAME	=	mechArena
 
 OBJ		=	$(SRC:.cpp=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -Wno-shadow
 
 %.o :		%.cpp
 			clang++ -c -g $(CFLAGS) $< -o $@
