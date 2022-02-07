@@ -1,5 +1,7 @@
-#include "AMateria.hpp"
 #pragma once
+#include <string>
+
+class AMateria;
 
 class ICharacter{
     public:

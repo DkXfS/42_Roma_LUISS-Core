@@ -4,24 +4,21 @@ MateriaSource::MateriaSource(): count(0){
     for(int i=0; i<4; i++){
         materias[i] = NULL;
     }
-    std::cout << "__- MateriaSource constructor -__" << std::endl;
+    //std::cout << "__- MateriaSource default constructor -__" << std::endl;
 }
 
 MateriaSource::~MateriaSource(){
-    for(int i=0; i<4; i++){
-        if(materias[i])
-            delete materias[i];
-    }
-    std::cout << "__- MateriaSource destructor -__" << std::endl;
+    clearMaterias();
+    //std::cout << "__- MateriaSource destructor -__" << std::endl;
 }
 
 void MateriaSource::learnMateria(AMateria *mat){
     if(count < 4){
-        materias[count++] = mat->clone();
-        std::cout << "A source has learnt a materia." << std::endl; 
+        materias[count++] = mat;
+        //std::cout << "A source has learnt '" << mat->getType() << "' materia." << std::endl; 
     }
-    else
-        std::cout << "A source can't learn more materias." << std::endl;
+    //else
+    //    std::cout << "A source can't learn more materias." << std::endl;
 }
 
 AMateria* MateriaSource::createMateria(std::string const &type){
@@ -33,14 +30,23 @@ AMateria* MateriaSource::createMateria(std::string const &type){
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& og){
-    for(int i=0; i<og.count; i++){
+    clearMaterias();
+    count = og.count;
+    for(int i=0; i<count; i++){
         //if(og.materias[i])
             materias[i] = og.materias[i]->clone();
     }
+    return *this;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& og): count(og.count){
     for(int i=0; i<count; i++){
         materias[i] = og.materias[i]->clone();
+    }
+}
+
+void MateriaSource::clearMaterias(){
+    for(int i=0; i<count; i++){
+        delete materias[i];
     }
 }

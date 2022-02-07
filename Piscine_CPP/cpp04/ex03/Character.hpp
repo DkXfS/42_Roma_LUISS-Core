@@ -1,9 +1,13 @@
 #pragma once
 #include "ICharacter.hpp"
+#include "AMateria.hpp"
+#include <iostream>
 
 class Character: public ICharacter{
     AMateria* materia[4];
     std::string name;
+    int count;
+    void clearMaterias();
 
     public:
         Character();

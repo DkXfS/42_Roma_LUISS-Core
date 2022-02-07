@@ -5,6 +5,7 @@
 class MateriaSource: public IMateriaSource{
     AMateria* materias[4];
     int count;
+    void clearMaterias();
 
     public:
         MateriaSource();

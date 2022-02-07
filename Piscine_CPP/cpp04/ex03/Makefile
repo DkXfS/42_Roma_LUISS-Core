@@ -5,7 +5,7 @@ SRC		=	main.cpp\
 			MateriaSource.cpp\
 			Character.cpp
 
-NAME	=	animals
+NAME	=	magic
 
 OBJ		=	$(SRC:.cpp=.o)
 
