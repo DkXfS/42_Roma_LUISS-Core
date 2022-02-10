@@ -6,7 +6,7 @@ Fixed::Fixed(): value(0){
     //std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& val): value(val.value){
+Fixed::Fixed(const Fixed& val): value(val.getRawBits()){
     //std::cout << "Copy constructor called" << std::endl;
     //this->value = val.value;
 }
@@ -33,7 +33,7 @@ Fixed::~Fixed(){
 
 Fixed& Fixed::operator=(const Fixed& val){
     //std::cout << "Assignation operator called" << std::endl;
-    this->value = val.value;
+    this->value = val.getRawBits();
     return *this;
 }
 
