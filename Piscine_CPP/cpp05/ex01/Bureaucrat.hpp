@@ -1,13 +1,15 @@
+#pragma once
 #include <string>
 #include <iostream>
-//#include <>
+
+class Form;
 
 class Bureaucrat{
     const std::string name;
     int grade;
+    Bureaucrat();
 
     public:
-    Bureaucrat();
     ~Bureaucrat();
     Bureaucrat(std::string name, int grade);
     Bureaucrat(const Bureaucrat& og);
@@ -16,6 +18,7 @@ class Bureaucrat{
     int getGrade() const;
     void gradeIncrement();
     void gradeDecrement();
+    void signForm(Form& fro);
 
     class GradeTooHighException: public std::exception{
         virtual const char* what() const throw(){
