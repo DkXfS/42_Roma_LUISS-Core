@@ -3,11 +3,11 @@
 PresidentialPardonForm::PresidentialPardonForm(): Form("PresidentialPardonForm", 25, 5){}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target): Form("PresidentialPardonForm", 25, 5), target(target){
-    std::cout << "A PresidentialPardonForm has been created" << std::endl;
+    std::cout << "_- A PresidentialPardonForm has been created -_" << std::endl;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(){
-    std::cout << "PresidentialPardonForm Destructor" << std::endl;    
+    std::cout << "_- PresidentialPardonForm Destructor -_" << std::endl;    
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& og): Form(og), target(og.target){

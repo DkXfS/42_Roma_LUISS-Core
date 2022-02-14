@@ -2,7 +2,7 @@ SRC		=	main.cpp\
 			Bureaucrat.cpp\
 			Form.cpp\
 			ShrubberyCreationForm.cpp\
-			#PresidentialPardonForm.cpp\
+			PresidentialPardonForm.cpp\
 			RobotomyRequestForm.cpp
 
 NAME	=	bureaucrats
@@ -23,7 +23,7 @@ clean:
 			rm -f $(OBJ)
 
 fclean:		clean
-			rm -f $(NAME)
+			rm -f $(NAME) *_shrubbery
 
 re:			fclean all
 

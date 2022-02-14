@@ -11,13 +11,13 @@ Form::Form(std::string name, int signGrade, int execGrade): _name(name), _signGr
         throw GradeTooLowException("execution");
     if(_execGrade < 1)
         throw GradeTooHighException("execution");
-    std::cout << "Form " << _name << " has been created" << std::endl;
+    std::cout << "_- Base Form " << _name << " has been created -_" << std::endl;
 }
 
 Form::Form(const Form& og): _name(og._name), _signGrade(og._signGrade), _execGrade(og._execGrade), _signed(og._signed){}
 
 Form::~Form(){
-    std::cout << "FORM DESTRUCTOR" << std::endl;
+    std::cout << "_- Base Form Destructor -_" << std::endl;
 }
 
 Form& Form::operator=(const Form& og){

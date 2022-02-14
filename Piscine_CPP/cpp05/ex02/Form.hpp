@@ -13,43 +13,45 @@ class Form{
         std::string type;
         virtual const char* what() const throw(){
             if(type == "sign")
-                return "_! Exception: The Form's sign grade is too high !_";
+                return "!! Exception: The Form's sign grade is too high !!";
             if(type == "execution")
-                return "_! Exception: The Form's execution grade is too high !_";
+                return "!! Exception: The Form's execution grade is too high !!";
             else
-                return "_! Exception: The Form's grade is too low !_";
+                return "!! Exception: The Form's grade is too low !!";
         }
 
         public:
         GradeTooHighException(std::string type): type(type){}
+        ~GradeTooHighException() _NOEXCEPT{}
     };
     class GradeTooLowException: public std::exception{
         std::string type;
         virtual const char* what() const throw(){
             if(type == "sign")
-                return "_! Exception: The Form's sign grade is too low !_";
+                return "!! Exception: The Form's sign grade is too low !!";
             if(type == "execution")
-                return "_! Exception: The Form's execution grade is too low !_";
+                return "!! Exception: The Form's execution grade is too low !!";
             else
-                return "_! Exception: The Form's grade is too low !_";
+                return "!! Exception: The Form's grade is too low !!";
         }
 
         public:
         GradeTooLowException(std::string type): type(type){}
+        ~GradeTooLowException() _NOEXCEPT{}
     };
     class NotSignedException: public std::exception{
         virtual const char* what() const throw(){
-            return "_! Exception: Form not signed !_";
+            return "!! Exception: Form not signed !!";
         }
     };
     class CantExecuteException: public std::exception{
         virtual const char* what()const throw(){
-            return "_! Exception: Bureaucrat's grade not high enough to execute form !_";
+            return "!! Exception: Bureaucrat's grade not high enough to execute form !!";
         } 
     };
     class CantSignException: public std::exception{
         virtual const char* what()const throw(){
-            return "_! Exception: Bureaucrat's grade not high enough to sign form !_";
+            return "!! Exception: Bureaucrat's grade not high enough to sign form !!";
         } 
     };
 

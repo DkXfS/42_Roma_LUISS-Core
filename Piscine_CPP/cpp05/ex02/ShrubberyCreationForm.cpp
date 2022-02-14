@@ -3,11 +3,11 @@
 ShrubberyCreationForm::ShrubberyCreationForm(): Form("ShrubberyCreationForm", 145, 137){}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target): Form("ShrubberyCreationForm", 145, 137), target(target){
-    std::cout << "A ShrubberyCreationForm has been created" << std::endl;
+    std::cout << "_- A ShrubberyCreationForm has been created -_" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){
-    std::cout << "SHRUBBERY DESTRUCTOR" << std::endl;
+    std::cout << "_- ShrubberyCreationForm Destructor -_" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& og): Form(og), target(og.target){
