@@ -16,7 +16,9 @@ Form::Form(std::string name, int signGrade, int execGrade): _name(name), _signGr
 
 Form::Form(const Form& og): _name(og._name), _signGrade(og._signGrade), _execGrade(og._execGrade), _signed(og._signed){}
 
-Form::~Form(){}
+Form::~Form(){
+    std::cout << "FORM DESTRUCTOR" << std::endl;
+}
 
 Form& Form::operator=(const Form& og){
     _signed = og._signed;
@@ -41,7 +43,7 @@ std::string Form::getName()const{
 
 void Form::beSigned(const Bureaucrat& bro){
     if(bro.getGrade() > _signGrade)
-        throw GradeTooLowException("sign");
+        throw CantSignException();
     _signed = true;
 }
 
@@ -51,4 +53,12 @@ std::ostream& operator<<(std::ostream& out, const Form& og){
         out << "yes";
     else out << "no";
     return out;
+}
+
+void Form::execute(Bureaucrat const& executor) const{
+    if(!_signed)
+        throw NotSignedException();
+    if(executor.getGrade() > _execGrade)
+        throw CantExecuteException();
+    action();
 }

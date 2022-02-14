@@ -35,6 +35,4 @@ int main(){
     std::cout << "----------------------------" << std::endl;
     std::cout << form <<std::endl;
     std::cout << "----------------------------" << std::endl;
-    //std::cout << "b1 info :" << std::endl << "\t" << b1;
-    //std::cout << "b2 info :" << std::endl << "\t" << b2;
 }
