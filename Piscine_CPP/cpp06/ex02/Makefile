@@ -1,6 +1,7 @@
-SRC		=	main.cpp
+SRC		=	main.cpp\
+			Base.cpp
 
-NAME	=	staticCast
+NAME	=	dynamicCast
 
 OBJ		=	$(SRC:.cpp=.o)
 

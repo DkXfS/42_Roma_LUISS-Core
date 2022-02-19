@@ -1,6 +1,6 @@
 SRC		=	main.cpp
 
-NAME	=	staticCast
+NAME	=	reinterpretCast
 
 OBJ		=	$(SRC:.cpp=.o)
 
