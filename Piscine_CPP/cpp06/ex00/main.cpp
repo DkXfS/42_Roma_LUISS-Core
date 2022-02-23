@@ -74,26 +74,30 @@ void intCase(double d){
 }
 
 void floatCase(double d){
+    double intpart;
+
     std::cout << "float: \t";
     if (d != d || d == -std::numeric_limits<double>::infinity() || d == std::numeric_limits<double>::infinity())
         std::cout << static_cast<float>(d) << "f" << std::endl;
-    else if(d < std::numeric_limits<float>::min() || d > std::numeric_limits<float>::max())
-        std::cout << "impossible" << std::endl;
+    else if(static_cast<float>(d) < -std::numeric_limits<float>::max() || static_cast<float>(d) > std::numeric_limits<float>::max())
+        std::cout << "impossible\t" << std::endl;
     else{
         std::cout << static_cast<float>(d);
-        if(modf(d, (double*)NULL) == 0.0 && d < 1000000)
+        if(modf(d, &intpart) == 0.0 && d < 1000000)
             std::cout << ".0";
         std::cout << "f" << std::endl;
     }
 }
 
 void doubleCase(double d){
+    double intpart;
+
     std::cout << "double: ";
     if (d != d || d == -std::numeric_limits<double>::infinity() || d == std::numeric_limits<double>::infinity())
         std::cout << d << std::endl;
     else{
         std::cout << d;
-        if(modf(d, (double*)NULL) == 0.0 && d < 1000000)
+        if(modf(d, &intpart) == 0.0 && d < 1000000)
             std::cout << ".0";
         std::cout << std::endl;
     }
@@ -104,7 +108,7 @@ int main(int argc, char **argv){
     double d;
 
     if(argc != 2){
-        std::cout << "Error: One argument allowed/needed" << std::endl; 
+        std::cout << "Error: Only one argument allowed/needed" << std::endl;
         return 1;
     }
     if((type = inputType(argv[1])) == "false")

@@ -23,7 +23,7 @@ int main(){
     dat.spc = 'w';
     
     std::cout << "Data.info= " << dat.info << std::endl;
-    std::cout << "Data.spc= " << dat.spc << std::endl;
+    std::cout << "Data.spc= " << dat.spc << std::endl << std::endl;
     std::cout << "(Data*) &Data= " << &dat << std::endl << std::endl;
 
     std::cout << "-------------------------" << std::endl;
