@@ -2,6 +2,7 @@
 #include <iterator>
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 class Span{
     std::vector<int> _str;
@@ -30,4 +31,11 @@ class Span{
 
     template <typename itr>
     Span(itr beg, itr end): _str(std::vector<int>(beg, end)), _n(_str.size()){}
+
+    template <typename itr>
+    void addNumber(itr beg, itr end){
+        if(_str.size() + std::distance(beg, end) > _n)
+            throw SpanFullExc();
+        _str.insert(_str.begin() + _str.size(), beg, end);
+    }
 };

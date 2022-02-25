@@ -104,5 +104,29 @@ int main(){
     try {std::cout << "Longest Span: " << sp2.longestSpan() << std::endl;}
     catch(std::exception& e) {std::cout << e.what() << std::endl;}
   }
+  {
+    std::cout << std::endl << "_- Ranged AddNumber fail case -_" << std::endl;
+
+    std::vector<int> vec_tmp(createRandomVector(20));
+    Span sp2(19);
+    try{sp2.addNumber(vec_tmp.begin(), vec_tmp.end());}
+    catch(std::exception &e) {std::cout << e.what() << std::endl;}
+
+    try{std::cout << "Shortest Span: " << sp2.shortestSpan() << std::endl;}
+    catch(std::exception &e) {std::cout << e.what() << std::endl;}
+    try{std::cout << "Longest Span: " << sp2.longestSpan() << std::endl;}
+    catch(std::exception &e) {std::cout << e.what() << std::endl;}
+  }
+  {
+    std::cout << std::endl << "_- Ranged AddNumber success case -_" << std::endl;
+
+    std::vector<int> vec_tmp(createRandomVector(20));
+    Span sp2(20);
+    try{sp2.addNumber(vec_tmp.begin(), vec_tmp.end());}
+    catch(std::exception &e) {std::cout << e.what() << std::endl;}
+
+    std::cout << "Shortest Span: " << sp2.shortestSpan() << std::endl;
+    std::cout << "Longest Span: " << sp2.longestSpan() << std::endl;
+  }
   return 0;
 }
