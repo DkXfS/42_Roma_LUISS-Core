@@ -1,4 +1,5 @@
 #pragma once
+#include <exception>
 
 template<typename T>
 class Array{
@@ -24,10 +25,8 @@ class Array{
     }
 
     Array& operator=(Array const& a){
-        if(len){
-            std::cout << "trigg" << std::endl;
+        if(len)
             delete [] arr;
-        }
         len = a.len;
         arr = new T[len];
         for(unsigned int i=0; i<len; i++)
