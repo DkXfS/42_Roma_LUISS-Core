@@ -1,0 +1,15 @@
+services:
+  nginx:
+    build: ./requirements/nginx
+    env_file: ./.env
+
+  mariadb:
+    build: ./requirements/mariadb
+    env_file: ./.env
+
+  wordpress:
+    build: ./requirements/wordpress
+    env_file: ./.env
+    volumes:
+      - ~/data/wordpress:/srv
+      - ~/data/php:/etc
