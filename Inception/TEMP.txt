@@ -1,0 +1,12 @@
+# mysqld --help --verbose
+2022-09-10 15:28:33 0 [Warning] Could not open mysql.plugin table: "Table 'mysql.plugin' doesn't exist". Some options may be missing from the help text
+mysqld  Ver 10.6.9-MariaDB for Linux on x86_64 (MariaDB Server)
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Starts the MariaDB database server.
+
+Usage: mysqld [OPTIONS]
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf
+The following groups are read: mysqld server mysqld-10.6 mariadb mariadb-10.6 mariadbd mariadbd-10.6 client-server galera
